@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Brand extends Model
 {
@@ -17,4 +19,14 @@ class Brand extends Model
         'is_active',
         'description'
     ];
+
+    public function brands(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();
+    }
 }

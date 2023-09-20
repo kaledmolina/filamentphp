@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
@@ -18,4 +20,14 @@ class Order extends Model
         'shipping_price',
         'notes'
     ];
+    
+    public function orders(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+    
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

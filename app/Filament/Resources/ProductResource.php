@@ -24,12 +24,14 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
-    
-    protected static ?string $navigationLabel = 'Mis Productos';
+
+    protected static ?string $navigationLabel = 'Productos';
 
     protected static ?string $navigationGroup = 'Tienda';
 
-    protected static ?string $modelLabel = 'Producto';   
+    protected static ?int $navigationSort = 0;
+
+    protected static ?string $modelLabel = 'Producto';
 
     protected static ?string $pluralModelLabel = 'Mis productos';
 
@@ -37,7 +39,7 @@ class ProductResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            
+
 
             ->schema([
 
@@ -72,12 +74,12 @@ class ProductResource extends Resource
                                                 ->autofocus()
                                                 ->required()
                                                 ->placeholder('Descripción del producto')
-                                            ->columnSpan('full')   
+                                            ->columnSpan('full')
 
-                                         
-                                ])->columns(2),  
-                               
-                                
+
+                                ])->columns(2),
+
+
                                 Forms\Components\Section::make( 'Precio e inventario del producto')
 
                                     ->schema([
@@ -105,11 +107,11 @@ class ProductResource extends Resource
                                                     'deliverable' => ProductTypeEnum::DELIVERABLE->value,
                                                     'downloadable' => ProductTypeEnum::DOWNLOADABLE->value,
                                                     ])
-                                                ->required(),                      
+                                                ->required(),
                                 ])->columns(2),
-                                        
+
                     ]),
-                
+
                 Forms\Components\Group::make()
 
                         ->schema([
@@ -128,8 +130,8 @@ class ProductResource extends Resource
                                         Forms\Components\DatePicker::make('published_at')
                                             ->label('Fecha de publicación')
                                             ->default(now())
-                                            ->required(),  
-                                             
+                                            ->required(),
+
                                 ]),
                             Forms\Components\Section::make( 'Imagen del producto')
 
@@ -138,10 +140,10 @@ class ProductResource extends Resource
                                             ->directory('form-attachments')
                                             ->preserveFilenames()
                                             ->label('Imagen')
-                                            ->image() 
+                                            ->image()
                                             ->imageEditor()
-                                            ->required(), 
-                                             
+                                            ->required(),
+
                                   ])->collapsible(),
 
                                   Forms\Components\Section::make( 'Asociar producto a una marca')
@@ -151,13 +153,13 @@ class ProductResource extends Resource
                                                 ->label('Marca')
                                                 ->placeholder('Seleccione una marca')
                                                 ->relationship('brand', 'name')
-                                                ->required(),  
+                                                ->required(),
                                             ])
-                            
-                                    
-                ]) 
+
+
+                ])
              ]);
-            
+
     }
 
     public static function table(Table $table): Table
@@ -189,7 +191,7 @@ class ProductResource extends Resource
                     ->toggleable(),
                 tables\Columns\TextColumn::make('type')->label('Tipo'),
             ])
-            
+
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_visible')
                     ->label('¿Es visible?')
@@ -198,16 +200,18 @@ class ProductResource extends Resource
                         'no' => 'No',
                     ]),
                 Tables\Filters\SelectFilter::make('brand')
-                     
+
                     ->relationship('brand', 'name')
                     -> label('Marca')
             ])
             ->actions([
-                tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ])
-             
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -217,14 +221,14 @@ class ProductResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -232,5 +236,5 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
-    }    
+    }
 }

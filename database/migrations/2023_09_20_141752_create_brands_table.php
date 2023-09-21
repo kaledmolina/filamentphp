@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('url')->nullable();
             $table->string('primary_hex')->nullable();
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_visible')->default(false);
             $table->longText('description')->nullable();
             $table->timestamps();
         });

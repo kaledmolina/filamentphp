@@ -16,7 +16,7 @@ class Brand extends Model
         'slug',
         'url',
         'primary_hex',
-        'is_active',
+        'is_visible',
         'description'
     ];
 

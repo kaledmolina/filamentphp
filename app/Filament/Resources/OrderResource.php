@@ -75,6 +75,7 @@ class OrderResource extends Resource
                             ])->required(),
 
                             Forms\Components\MarkdownEditor::make('notes')
+                               ->required()
                                 ->columnSpanFull()
                         ])->columns(2),
                     Forms\Components\Wizard\Step::make('Order Items')

@@ -44,7 +44,8 @@ class CustomerResource extends Resource
                             ->unique(ignoreRecord: true),
 
                         Forms\Components\TextInput::make('phone')
-                            ->maxValue(50),
+                            ->maxValue(50)
+                            ->required(),
 
                         Forms\Components\DatePicker::make('date_of_birth'),
 

@@ -6,7 +6,6 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,97 +22,78 @@ class CustomerResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationGroup = 'Tienda';
-    protected static ?string $modelLabel = 'Cliente';
 
+    protected static ?string $navigationLabel = 'Clientes';
+    protected static ?string $modelLabel = 'Cliente';
     protected static ?string $pluralModelLabel = 'Mis Clientes';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('Información del Cliente')
-                    ->columns(2)
+                Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->autofocus()
-                            ->placeholder('Nombre del Cliente')
-                            ->label('Nombre del Cliente')
-                            ->required()
-                            ->maxValue(50),
-                        Forms\Components\TextInput::make('email')
-                            ->autofocus()
-                            ->placeholder('Correo Electrónico')
-                            ->label('Correo Electrónico')
-                            ->required()
-                            ->live(onBlur: true),
-                        Forms\Components\TextInput::make('phone')
-                            ->autofocus()
-                            ->placeholder('Teléfono')
-                            ->label('Teléfono')
-                            ->required()
-                            ->live(onBlur: true),
-                        Forms\Components\Datepicker::make('date_of_birth')
-                            ->autofocus()
-                            ->placeholder('Fecha de Nacimiento')
-                            ->label('Fecha de Nacimiento')
+                            ->maxValue(50)
                             ->required(),
-                        Forms\Components\TextInput::make('city')
-                            ->autofocus()
-                            ->placeholder('Ciudad')
-                            ->label('Ciudad')
-                            ->required() ,
-                        forms\Components\TextInput::make('zip_code')
-                            ->autofocus()
-                            ->placeholder('codigo postal')
-                            ->label('codigo postal')
-                            ->required() ,
-                        Forms\Components\TextInput::make('address')
-                            ->autofocus()
-                            ->placeholder('Dirección')
-                            ->label('Dirección')
+
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email Address')
                             ->required()
-                            ->columnSpan(2),
+                            ->email()
+                            ->unique(ignoreRecord: true),
 
+                        Forms\Components\TextInput::make('phone')
+                            ->maxValue(50),
 
-                    ])->columns(2),
+                        Forms\Components\DatePicker::make('date_of_birth'),
+
+                        Forms\Components\TextInput::make('city')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('zip_code')
+                            ->required(),
+
+                        Forms\Components\TextInput::make('address')
+                            ->required()
+                            ->columnSpanFull()
+                    ])->columns(2)
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->emptyStateDescription('Una vez que creas tu primer cliente, aparecerá aquí.')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Nombre')
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Correo Electrónico')
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('phone')
-                    ->label('Teléfono')
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('city')
-                    ->label('Ciudad')
-                    ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('date_of_birth')
-                    ->label('Fecha de Nacimiento')
-                    ->date('d/m/Y')
-                    ->sortable(),
+                    ->date()
+                    ->sortable()
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    tables\Actions\ViewAction::make(),
+                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
-                ]),
+                    Tables\Actions\DeleteAction::make()
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

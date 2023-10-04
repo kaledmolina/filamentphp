@@ -2,8 +2,7 @@
 
 namespace App\Enums;
 
-enum ProductTypeEnum: string
-{
+enum OrderStatusEnum : string {
     case PENDING = 'pending';
     case PROCESSING = 'processing';
     case COMPLETED = 'completed';

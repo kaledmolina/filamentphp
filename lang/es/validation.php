@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 return [
-    'regex' => 'El campo :attribute no debe contener puntos.',
     'accepted'             => 'El campo :attribute debe ser aceptado.',
     'accepted_if'          => 'El campo :attribute debe ser aceptado cuando :other sea :value.',
     'active_url'           => 'El campo :attribute debe ser una URL válida.',
@@ -116,7 +115,7 @@ return [
     'prohibited_if'        => 'El campo :attribute está prohibido cuando :other es :value.',
     'prohibited_unless'    => 'El campo :attribute está prohibido a menos que :other sea :values.',
     'prohibits'            => 'El campo :attribute prohibe que :other esté presente.',
-    //'regex'                => 'El formato del campo :attribute no es válido.',
+    'regex'                => 'El formato del campo :attribute no es válido.',
     'required'             => 'El campo :attribute es obligatorio.',
     'required_array_keys'  => 'El campo :attribute debe contener entradas para: :values.',
     'required_if'          => 'El campo :attribute es obligatorio cuando :other es :value.',

@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')
-                  ->constrained('customers')
-                  ->onDelete('cascade');
-            $table->string('number');
+                ->constrained('customers')
+                ->cascadeOnDelete();
+            $table->string('number')->unique();
             $table->decimal('total_price', 10, 2);
-            $table->enum('status', ['pending', 'processing', 'completed', 'declined', 'cancelled'])
-                  ->default('pending');
+            $table->enum('status', ['pending', 'processing', 'completed', 'declined'])
+                ->default('pending');
             $table->decimal('shipping_price')->nullable();
-            $table->longText('notes')->nullable();
-            $table->softDeletes();         
+            $table->longText('notes');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

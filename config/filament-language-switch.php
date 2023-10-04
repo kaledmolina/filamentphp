@@ -82,7 +82,7 @@ return [
         // 'en-GB'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'British English', 'flag_code' => 'gb' ],
         //'en-CA'       => ['name' => 'Canadian English',       'script' => 'Latn', 'native' => 'Canadian English', 'flag_code' => '' ],
         //'en-US'       => ['name' => 'U.S. English',           'script' => 'Latn', 'native' => 'U.S. English', 'flag_code' => '' ],
-         
+
         //'eo'          => ['name' => 'Esperanto',              'script' => 'Latn', 'native' => 'esperanto', 'flag_code' => '' ],
         //'eu'          => ['name' => 'Basque',                 'script' => 'Latn', 'native' => 'euskara', 'flag_code' => '' ],
         //'ewo'         => ['name' => 'Ewondo',                 'script' => 'Latn', 'native' => 'ewondo', 'flag_code' => '' ],

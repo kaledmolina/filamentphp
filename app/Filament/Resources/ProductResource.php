@@ -40,7 +40,7 @@ class ProductResource extends Resource
     {
         return $form
 
-
+        
             ->schema([
 
                     Forms\Components\Group::make()

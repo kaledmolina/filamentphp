@@ -28,6 +28,8 @@ return new class extends Migration
             $table->enum('type', ['deliverable', 'downloadable'])
                 ->default('deliverable');
             $table->date('published_at');
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

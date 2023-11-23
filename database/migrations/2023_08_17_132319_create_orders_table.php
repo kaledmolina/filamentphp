@@ -23,6 +23,8 @@ return new class extends Migration
             $table->decimal('shipping_price')->nullable();
             $table->longText('notes');
             $table->softDeletes();
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

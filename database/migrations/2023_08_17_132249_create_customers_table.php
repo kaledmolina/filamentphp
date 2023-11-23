@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('zip_code');
             $table->string('city');
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

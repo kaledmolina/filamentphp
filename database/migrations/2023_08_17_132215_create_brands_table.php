@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('primary_hex')->nullable();
             $table->boolean('is_visible')->default(false);
             $table->longText('description')->nullable();
+            $table->unsignedBigInteger('team_id');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

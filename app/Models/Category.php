@@ -13,7 +13,7 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'parent_id', 'is_visible', 'description'
+        'name', 'slug', 'parent_id', 'is_visible', 'description' , 'team_id'
     ];
 
     public function parent(): BelongsTo
@@ -29,5 +29,9 @@ class Category extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
+    }
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 }

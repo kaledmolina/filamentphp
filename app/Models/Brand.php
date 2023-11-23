@@ -11,11 +11,15 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'url', 'primary_hex', 'is_visible', 'description'
+        'name', 'slug', 'url', 'primary_hex', 'is_visible', 'description', 'team_id'
     ];
 
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 }

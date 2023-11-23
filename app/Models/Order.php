@@ -13,7 +13,7 @@ class Order extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'customer_id', 'number', 'total_price', 'status', 'shipping_price', 'notes'
+        'customer_id', 'number', 'total_price', 'status', 'shipping_price', 'notes', 'team_id'
     ];
 
     public function customer(): BelongsTo
@@ -24,5 +24,9 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
     }
 }

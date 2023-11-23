@@ -10,6 +10,10 @@ class Customer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'email', 'phone', 'date_of_birth', 'address', 'zip_code', 'city'
+        'name', 'email', 'phone', 'date_of_birth', 'address', 'zip_code', 'city', 'team_id'
     ];
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }
